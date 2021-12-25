@@ -1,4 +1,4 @@
-package com.example.popularmovies;
+package com.example.popularmovies.adapters;
 
 
 import android.view.LayoutInflater;
@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.popularmovies.R;
 import com.example.popularmovies.data.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -26,12 +26,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         movies = new ArrayList<>();
     }
 
-    interface OnPosterClickListener {
+    public interface OnPosterClickListener {
         void onPosterClick(int position);
     }
 
-    interface OnReachEndListener {
-        void onReachEnd();
+    public interface OnReachEndListener {
+        void onReachEnd();//метод вызывается при достижении конца листа
     }
 
     public void setOnPosterClickListener(OnPosterClickListener onPosterClickListener) {
@@ -51,7 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
-        if (i > movies.size() - 4 && onReachEndListener != null) {
+        if (movies.size() >= 20 && i > movies.size() - 4 && onReachEndListener != null) {
             onReachEndListener.onReachEnd();
         }
         Movie movie = movies.get(i);
@@ -81,6 +81,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
     }
 
+    public void clear() {
+        this.movies.clear();
+        notifyDataSetChanged();
+    }
+
     public void setMovies(List<Movie> movies) {
         this.movies = movies;
         notifyDataSetChanged();
@@ -95,3 +100,4 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return movies;
     }
 }
+

@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PopularMovies">
         <activity android:name=".FavouriteActivity"></activity>
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".DetailActivity" android:screenOrientation="landscape" android:configChanges="keyboardHidden|orientation" />
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
